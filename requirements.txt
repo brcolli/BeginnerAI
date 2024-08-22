@@ -1,0 +1,8 @@
+flask
+redis
+rq
+scikit-learn
+numpy
+pandas
+joblib
+gunicorn  # for production-ready server
