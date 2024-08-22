@@ -4,20 +4,26 @@ from redis import Redis
 import joblib
 import numpy as np
 
+"""
+A worker to take data from a Redis queue
+"""
+
 # Load the model and scaler
 model = joblib.load("iris_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
-# Connect to Redis
-redis_conn = Redis(host="redis", port=6379)
-queue = Queue(connection=redis_conn)
+# Connect to Redis on host="redis" and port=6379
+redis_conn = _____
+queue = Queue(connection=redis_conn)  # A Redis message queue for real-time processing
 
 
 # Define the task function
 def predict_task(input_data):
     input_data = np.array(input_data).reshape(1, -1)
     input_data_scaled = scaler.transform(input_data)
-    prediction = model.predict(input_data_scaled)
+
+    # Predict on the model with the input_data_scaled
+    prediction = _____
     return int(prediction[0])
 
 

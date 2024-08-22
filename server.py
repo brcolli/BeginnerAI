@@ -8,8 +8,8 @@ import json
 # Create a Flask app
 app = Flask(__name__)
 
-# Connect to Redis
-redis_conn = Redis(host="redis", port=6379)
+# Connect to Redis on host="redis" and port=6379
+redis_conn = _____
 queue = Queue(connection=redis_conn)
 
 
@@ -27,17 +27,22 @@ def predict():
 
     # Check the cache
     cache_key = create_cache_key(input_data)
-    cached_result = redis_conn.get(cache_key)
+
+    # Use the Redis connection redis_conn to attempt to get the cache_key
+    cached_result = _____
 
     if cached_result:
+        # Result is cached
         return jsonify({"prediction": int(cached_result)})
+
+    # Result is not cached
 
     # Enqueue the task if not in cache
     job = queue.enqueue(predict_task, input_data)
 
-    # Store the result in the cache once it's done
+    # Use the Redis connection redis_conn to store the result in the cache once it's done
     def store_result(job, connection, result, *args, **kwargs):
-        redis_conn.set(cache_key, result)
+        _____
 
     job.on_success = store_result
 
@@ -46,7 +51,9 @@ def predict():
 
 @app.route("/result/<job_id>", methods=["GET"])
 def get_result(job_id):
-    job = queue.fetch_job(job_id)
+
+    # Fetch the job from the queue using the job_id to see the status
+    job = _____
     if job.is_finished:
         return jsonify({"prediction": job.result})
     else:

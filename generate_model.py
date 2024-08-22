@@ -9,21 +9,21 @@ import pandas as pd
 # Load the Iris dataset
 data = load_iris()
 
-# Create a DataFrame
-df = pd.DataFrame(data.data, columns=data.feature_names)
+# Create a DataFrame, where the columns are data.feature_names
+df = _____
 df["target"] = data.target
 
-# Save the dataset to a CSV file
-df.to_csv("iris.csv", index=False)
+# Save the dataset to a CSV file, setting index to False
+_____
 
 print("Data saved to iris.csv")
 
-# Load the dataset
-df = pd.read_csv("iris.csv")
+# Load the dataset from the above CSV
+df = _____
 
-# Split the data into features and target
-X = df.drop("target", axis=1)
-y = df["target"]
+# Split the data into features and target. Features = everything BUT target
+X = _____
+y = _____
 
 # Split the data into training and test sets
 X_train, X_test, y_train, y_test = train_test_split(
@@ -40,14 +40,18 @@ joblib.dump(scaler, "scaler.pkl")
 print("Data processing complete")
 
 # Train a Support Vector Machine model
-model = SVC(kernel="linear")
+
+# Create an instance of an SVC object, where kernel="linear"
+model = _____
+
+# run .fit() on the model, using the scaled train values and the y_train
 model.fit(X_train_scaled, y_train)
 
-# Make predictions on the test set
-y_pred = model.predict(X_test_scaled)
+# Make predictions on the test set, X_test_scaled
+y_pred = _____
 
-# Evaluate the model
-accuracy = accuracy_score(y_test, y_pred)
+# Evaluate the model, using accuracy_score imported above. Compare y_test and y_pred
+accuracy = _____
 print(f"Model Accuracy: {accuracy:.2f}")
 
 # Save the model
